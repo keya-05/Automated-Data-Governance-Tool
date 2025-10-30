@@ -1,0 +1,42 @@
+{
+  "dataset": "enterprise_2024",
+  "rows": 5,
+  "missing": [
+    "Industry_code_NZSIOC",
+    "Industry_name_NZSIOC",
+    "Year",
+    "Variable_name"
+  ],
+  "issues": [],
+  "exprs": [
+    {
+      "name": "valid_year_range",
+      "passed": false,
+      "expr": "(df['Year'] >= 2000) & (df['Year'] <= 2025)"
+    },
+    {
+      "name": "non_negative_values",
+      "passed": false,
+      "expr": "(df['Value'] >= 0)"
+    },
+    {
+      "name": "unique_industries",
+      "passed": false,
+      "expr": "df['Industry_code_NZSIOC'].is_unique"
+    }
+  ],
+  "pii": {
+    "email": [
+      "email"
+    ],
+    "phone": [
+      "phone"
+    ],
+    "order_date": [
+      "phone"
+    ]
+  },
+  "duplicates": 5,
+  "ver": "0.0.1",
+  "ts": "2025-10-30T12:28:12.569568"
+}

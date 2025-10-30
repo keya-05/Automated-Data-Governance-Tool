@@ -1,0 +1,6 @@
+order_id,customer_name,email,phone,amount,currency,order_date,country
+1001,Arjun Mehta,arjun.mehta@example.com,+91-9876543210,1299.0,INR,2024-12-12,IN
+1002,Priya Sharma,priya.s@example.com,+91-9123456780,2599.0,INR,2024-12-15,IN
+1003,Ravi Kumar,ravi.k@example.com,+1-415-555-0199,39.99,USD,2025-01-02,US
+1004,Anita Rao,anita.rao@example.com,,59.99,USD,2025-01-08,US
+1005,John Doe,john.doe@example.com,+44-20-7946-0958,49.99,GBP,2025-01-11,GB

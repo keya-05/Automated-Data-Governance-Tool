@@ -1,0 +1,38 @@
+{
+  "dataset": "large_orders",
+  "rows": 200,
+  "missing": [],
+  "issues": [],
+  "exprs": [
+    {
+      "name": "valid_country_values",
+      "passed": true,
+      "expr": "df['country'].isin(allowed_countries)"
+    },
+    {
+      "name": "unique_ids",
+      "passed": true,
+      "expr": "df['order_id'].is_unique"
+    },
+    {
+      "name": "valid_order_dates",
+      "passed": false,
+      "error": "name 'pd' is not defined",
+      "expr": "(pd.to_datetime(df['order_date'], errors='coerce').notna())"
+    }
+  ],
+  "pii": {
+    "email": [
+      "email"
+    ],
+    "phone": [
+      "phone"
+    ],
+    "order_date": [
+      "phone"
+    ]
+  },
+  "duplicates": 0,
+  "ver": "0.0.1",
+  "ts": "2025-10-30T13:57:40.778528"
+}

@@ -1,0 +1,44 @@
+datasets:
+  large_orders:
+    id_column: "order_id"
+    pii_scan: true
+    write_parquet: true
+    allowed_countries: ["IN", "US", "GB", "AU", "CA"]
+    schema:
+      order_id: { type: str, required: true }
+      customer_name: { type: str, required: true }
+      email: { type: str, required: true }
+      phone: { type: str, required: false }
+      country: { type: str, required: true }
+      order_date: { type: date, required: true, format: "%Y-%m-%d" }
+      # Example numeric columns — you can list more if you want specific validation
+      col_001: { type: int, required: false, min: 0 }
+      col_002: { type: int, required: false, min: 0 }
+      col_003: { type: int, required: false, min: 0 }
+      # Wildcard handling — all other cols will be accepted as optional numeric fields
+    quality_checks:
+      - name: valid_country_values
+        expr: "df['country'].isin(allowed_countries)"
+      - name: unique_ids
+        expr: "df['order_id'].is_unique"
+      - name: valid_order_dates
+        expr: "(pd.to_datetime(df['order_date'], errors='coerce').notna())"
+
+  enterprise_2024:
+    id_column: "Industry_code_NZSIOC"
+    pii_scan: true
+    write_parquet: true
+    schema:
+      Industry_code_NZSIOC: { type: str, required: true }
+      Industry_name_NZSIOC: { type: str, required: true }
+      Units: { type: float, required: false }
+      Year: { type: int, required: true }
+      Variable_name: { type: str, required: true }
+      Value: { type: float, required: false }
+    quality_checks:
+      - name: valid_year_range
+        expr: "(df['Year'] >= 2000) & (df['Year'] <= 2025)"
+      - name: non_negative_values
+        expr: "(df['Value'] >= 0)"
+      - name: unique_industries
+        expr: "df['Industry_code_NZSIOC'].is_unique"

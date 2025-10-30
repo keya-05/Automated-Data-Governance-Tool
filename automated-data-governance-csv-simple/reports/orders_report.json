@@ -1,0 +1,46 @@
+{
+  "dataset": "orders",
+  "rows": 200,
+  "missing": [
+    "order_id",
+    "amount",
+    "currency"
+  ],
+  "issues": [
+    [
+      "currency",
+      "enum_violation"
+    ]
+  ],
+  "exprs": [
+    {
+      "name": "valid_country_values",
+      "passed": false,
+      "expr": "df['country'].isin(allowed_countries)"
+    },
+    {
+      "name": "non_negative_amount",
+      "passed": false,
+      "expr": "df['amount'] >= 0"
+    },
+    {
+      "name": "unique_ids",
+      "passed": false,
+      "expr": "df['order_id'].is_unique"
+    }
+  ],
+  "pii": {
+    "email": [
+      "email"
+    ],
+    "phone": [
+      "phone"
+    ],
+    "order_date": [
+      "phone"
+    ]
+  },
+  "duplicates": 200,
+  "ver": "0.0.1",
+  "ts": "2025-10-30T12:28:49.696391"
+}
